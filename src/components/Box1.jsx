@@ -18,7 +18,7 @@ export default function Box1({ gameConstants, box1Count, box1Steal }) {
             className={`box1 box ${empty && ""} ${q1Full ? "q1Full" : ""} ${q2Full ? "q2Full" : ""} ${q3Full ? "q3Full" : ""} ${full ? "full" : ""}`}
             onClick={handleBox1Click}>
             <h1>{box1Count}</h1>
-            {box1Count < gameConstants.boxFullValue ? <h3>Click to fill!</h3> : <h3>Tank 1 full!</h3>}
+            {box1Count < gameConstants.boxFullValue ? <h3>Click to fill!💦</h3> : <h3>Tank 1 full!🚫</h3>}
         </div>
     )
 }

@@ -22,7 +22,7 @@ export default function Timer({ seconds, setSeconds }) {
     };
 
     return (
-        <div>
+        <div className="timer">
             <h1>{formatTime(seconds)}</h1>
         </div>
     );

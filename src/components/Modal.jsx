@@ -5,14 +5,6 @@ import '../css/modal.css'
 export default function Modal({ gameConstants, seconds, mainCount, box1Count, box2Count, box3Count, fullReset, gameComplete, setGameComplete, gameOver, setGameOver }) {
     
     useEffect(()=>{
-        if (box1Count >= gameConstants.boxFullValue && box2Count >= gameConstants.boxFullValue && box3Count >= gameConstants.boxFullValue) {
-          setGameComplete(true);  
-        } else {
-          setGameComplete(false);
-        }
-    }, [box1Count, box2Count, box3Count]);
-
-    useEffect(()=>{
         if (seconds <= 0 || mainCount >= gameConstants.mainBoxLimit) {
             setGameOver(true);
         } else {
@@ -20,22 +12,35 @@ export default function Modal({ gameConstants, seconds, mainCount, box1Count, bo
         }
     }, [seconds, mainCount]);
 
+    useEffect(()=>{
+        if (box1Count >= gameConstants.boxFullValue && box2Count >= gameConstants.boxFullValue && box3Count >= gameConstants.boxFullValue) {
+          setGameComplete(true);
+          setGameOver(false);  
+        } else {
+          setGameComplete(false);
+        }
+    }, [box1Count, box2Count, box3Count]);
+
     return (
-        <div className="modal">
+        <>
             {gameOver && 
-            <div>
-            <h1>GAMEOVER!</h1>
-            <p>Want to play again?</p>
-            <button onClick={fullReset}>Play again</button>
-            </div>
+                <div className="modal" style={{display: (gameOver) ? "block" : "none"}}>
+                    <div className="modalMessage">
+                    <h1>GAMEOVER!😭</h1>
+                    <h3>Want to play again?</h3>
+                    <button onClick={fullReset}>Start</button>
+                    </div>
+                </div>
             }
             {gameComplete && 
-            <div>
-            <h1>Congrats you've completed the game!!!</h1>
-            <p>Want to play again?</p>
-            <button onClick={fullReset}>Play again</button>
-            </div>
+                <div className="modal" style={{display: (gameComplete) ? "block" : "none"}}>
+                    <div className="modalMessage">
+                    <h1>Congrats you won!!!🎉🎉🎉</h1>
+                    <h3>Want to play again?</h3>
+                    <button onClick={fullReset}>Start</button>
+                    </div>
+                </div>
             }
-        </div>
+        </>
     );
 }

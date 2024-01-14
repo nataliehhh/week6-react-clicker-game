@@ -1,0 +1,29 @@
+button {
+    background-color: var(--alt-color);
+    color: black;
+    border: 4px solid black;
+    padding: 8px;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1.5rem;
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
+button:active {
+    background-color: white;
+    color: var(--alt-color);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

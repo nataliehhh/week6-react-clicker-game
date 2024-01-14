@@ -4,6 +4,13 @@
     background-color: var(--box-color);
     border-radius: 8px;
     border: solid black;
+    text-align: center;
+    padding-top: 75px;
+}
+
+.inactive {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .q1Full {

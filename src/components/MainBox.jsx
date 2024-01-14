@@ -12,6 +12,7 @@ export default function MainBox({ mainCount, gameConstants }) {
     <div className={
       `mainBox box ${q1Full ? "q1Full" : ""} ${q2Full ? "q2Full" : ""} ${q3Full ? "q3Full" : ""} ${full ? "full" : ""}`}>
         <h1>{mainCount}</h1>
+        <h3>({gameConstants.mainBoxLimit} MAX)</h3>
     </div>
   );
 }

@@ -11,14 +11,14 @@ import tapImage from './images/tap2.png'
 export default function App() {
 
   const gameConstants = {
-    box1StealValue: 10,
-    box1StealCost: 10,
+    box1StealValue: 5,
+    box1StealCost: 1,
     box2StealValue: 10,
-    box2StealCost: 10,
+    box2StealCost: 5,
     box3StealValue: 10,
     box3StealCost: 10,
     boxFullValue: 200,
-    mainBoxLimit: 300,
+    mainBoxLimit: 200,
     initialSeconds: 60,
   }
 
@@ -31,7 +31,7 @@ export default function App() {
   const [box3Count, setBox3Count] = useState(
     parseInt(localStorage.getItem("box3Count")) || 0); 
   const [countRate, setCountRate] = useState(
-    parseInt(localStorage.getItem("countRate")) || 1);
+    parseInt(localStorage.getItem("countRate")) || 3);
   const [seconds, setSeconds] = useState(
     parseInt(localStorage.getItem("seconds")) || gameConstants.initialSeconds);
   const [gameComplete, setGameComplete] = useState(false);
@@ -57,10 +57,10 @@ export default function App() {
   }, [mainCount, countRate, seconds, box1Count, box2Count, box3Count]);
 
   function box1Steal() {
-    setBox1Count(box1Count + gameConstants.box1StealValue);
     setMainCount((currentMainCount) => {
       const newMainCount = currentMainCount - gameConstants.box1StealCost;
       if (newMainCount > 0) {
+        setBox1Count(box1Count + gameConstants.box1StealValue);
         return newMainCount;
       } else {
         return 0;
@@ -69,10 +69,10 @@ export default function App() {
   }    
 
   function box2Steal() {
-    setBox2Count(box2Count + gameConstants.box2StealValue);
     setBox1Count((box1Count) => {
       const newBox1Count = box1Count - gameConstants.box2StealCost;
       if (newBox1Count > 0) {
+        setBox2Count(box2Count + gameConstants.box2StealValue);
         return newBox1Count;
       } else {
         return 0;
@@ -81,10 +81,10 @@ export default function App() {
   }
   
   function box3Steal() {
-    setBox3Count(box3Count + gameConstants.box3StealValue);
     setBox2Count((box2Count) => {
       const newBox2Count = box2Count - gameConstants.box3StealCost;
       if (newBox2Count > 0) {
+        setBox3Count(box3Count + gameConstants.box3StealValue);
         return newBox2Count;
       } else {
         return 0;
@@ -99,6 +99,8 @@ export default function App() {
     setBox2Count(0);
     setBox3Count(0);
     setSeconds(gameConstants.initialSeconds);
+    setGameComplete(false);
+    setGameOver(false);
   };
 
   return (
@@ -107,19 +109,19 @@ export default function App() {
         <div className="intro">
           <h1>Fill all 3 tanks before the water overflows or time runs out!</h1>
         </div>
-      <Timer className="timer" seconds={seconds} setSeconds={setSeconds} />
+      <Timer seconds={seconds} setSeconds={setSeconds} />
+      <button onClick={fullReset} >Restart</button>
       </div>
 
       <div className="gridContainer">
       <img className="tapImage" src={tapImage} alt="running tap graphic"/>
       <MainBox mainCount={mainCount} gameConstants={gameConstants} />
       <Box1 gameConstants={gameConstants} box1Count={box1Count} box1Steal={box1Steal} />
-      <Box2 gameConstants={gameConstants} box2Count={box2Count} box2Steal={box2Steal} />
-      <Box3 gameConstants={gameConstants} box3Count={box3Count} box3Steal={box3Steal} />
+      <Box2 gameConstants={gameConstants} box1Count={box1Count} box2Count={box2Count} box2Steal={box2Steal} />
+      <Box3 gameConstants={gameConstants} box2Count={box2Count} box3Count={box3Count} box3Steal={box3Steal} />
       </div>
 
       <Upgrades countRate={countRate} setCountRate={setCountRate} box3Count={box3Count} setBox3Count={setBox3Count} />
-      <button onClick={fullReset} >Restart</button>
 
       <Modal gameConstants={gameConstants} seconds={seconds} mainCount={mainCount} box1Count={box1Count} box2Count={box2Count} box3Count={box3Count} gameComplete={gameComplete} gameOver={gameOver} setGameComplete={setGameComplete} setGameOver={setGameOver} fullReset={fullReset} />
     </>
