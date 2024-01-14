@@ -52,8 +52,8 @@ export default function App() {
     localStorage.setItem("countRate", countRate.toString());
     localStorage.setItem("seconds", seconds.toString());
     localStorage.setItem("box1Count", box1Count.toString());
-    localStorage.setItem("box2Count", box1Count.toString());
-    localStorage.setItem("box3Count", box1Count.toString());
+    localStorage.setItem("box2Count", box2Count.toString());
+    localStorage.setItem("box3Count", box3Count.toString());
   }, [mainCount, countRate, seconds, box1Count, box2Count, box3Count]);
 
   function box1Steal() {
