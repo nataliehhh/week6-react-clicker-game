@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import '../css/modal.css'
 
 
-export default function Modal({ seconds, mainCount, box1Count, box2Count, box3Count, fullReset, gameComplete, setGameComplete, gameOver, setGameOver }) {
+export default function Modal({ gameConstants, seconds, mainCount, box1Count, box2Count, box3Count, fullReset, gameComplete, setGameComplete, gameOver, setGameOver }) {
     
     useEffect(()=>{
-        if (box1Count >= 10 && box2Count >= 10 && box3Count >= 10) {
+        if (box1Count >= gameConstants.boxFullValue && box2Count >= gameConstants.boxFullValue && box3Count >= gameConstants.boxFullValue) {
           setGameComplete(true);  
         } else {
           setGameComplete(false);
@@ -13,7 +13,7 @@ export default function Modal({ seconds, mainCount, box1Count, box2Count, box3Co
     }, [box1Count, box2Count, box3Count]);
 
     useEffect(()=>{
-        if (seconds <= 0 || mainCount >= 300) {
+        if (seconds <= 0 || mainCount >= gameConstants.mainBoxLimit) {
             setGameOver(true);
         } else {
             setGameOver(false);

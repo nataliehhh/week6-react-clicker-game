@@ -1,0 +1,23 @@
+.box {
+    width: 300px;
+    height: 200px;
+    background-color: var(--box-color);
+    border-radius: 8px;
+    border: solid black;
+}
+
+.q1Full {
+    background: linear-gradient(to bottom, var(--box-color) 0% 75%, var(--water-color) 75% 100%);
+}
+
+.q2Full {
+    background: linear-gradient(var(--box-color) 50%, var(--water-color) 50%);
+}
+
+.q3Full {
+    background: linear-gradient(to bottom, var(--box-color) 0% 25%, var(--water-color) 25% 100%);
+}
+
+.full {
+    background-color: var(--water-color);
+}
